@@ -1,7 +1,6 @@
 import 'package:equatable/equatable.dart';
-
-import '../../models/cart_line.dart';
-import '../../models/receipt.dart';
+import 'package:mini_pos_checkout/models/cart_line.dart';
+import 'package:mini_pos_checkout/models/receipt.dart';
 
 abstract class CartState extends Equatable {
   const CartState();
@@ -15,16 +14,26 @@ class CartInitial extends CartState {
 }
 
 class CartLoaded extends CartState {
-  final List<CartLine> items;
-  final double totalAmount;
+  final List<CartLine> lines;
+  final double subtotal;
+  final double vat;
+  final double discount;
+  final double grandTotal;
 
   const CartLoaded({
-    required this.items,
-    required this.totalAmount,
+    required this.lines,
+    required this.subtotal,
+    required this.vat,
+    required this.discount,
+    required this.grandTotal,
   });
 
+  // Backward compatibility
+  List<CartLine> get items => lines;
+  double get totalAmount => grandTotal;
+
   @override
-  List<Object> get props => [items, totalAmount];
+  List<Object> get props => [lines, subtotal, vat, discount, grandTotal];
 }
 
 class CartCheckingOut extends CartState {

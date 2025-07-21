@@ -171,8 +171,8 @@ void main() {
     test('should handle catalog JSON format', () {
       // Arrange - Sample from actual catalog
       final catalogItems = [
-        {"id": "p01", "name": "Coffee", "price": 2.50},
-        {"id": "p02", "name": "Bagel", "price": 3.20},
+        {'id': 'p01', 'name': 'Coffee', 'price': 2.50},
+        {'id': 'p02', 'name': 'Bagel', 'price': 3.20},
       ];
 
       // Act

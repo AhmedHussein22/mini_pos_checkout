@@ -2,11 +2,6 @@ import 'package:equatable/equatable.dart';
 
 /// Represents a product in the catalog.
 class Item extends Equatable {
-  final String id;
-  final String name;
-  final double price;
-  final String? description;
-
   const Item({
     required this.id,
     required this.name,
@@ -22,6 +17,11 @@ class Item extends Equatable {
       description: json['description'] as String?,
     );
   }
+
+  final String id;
+  final String name;
+  final double price;
+  final String? description;
 
   Map<String, dynamic> toJson() {
     return {
