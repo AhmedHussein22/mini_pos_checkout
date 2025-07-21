@@ -1,6 +1,6 @@
 import 'package:hydrated_bloc/hydrated_bloc.dart';
+
 import '../../models/cart_line.dart';
-import '../../models/item.dart';
 import '../../models/receipt.dart';
 import 'cart_event.dart';
 import 'cart_state.dart';
@@ -22,7 +22,7 @@ class CartBloc extends HydratedBloc<CartEvent, CartState> {
     if (currentState is CartLoaded) {
       final items = List<CartLine>.from(currentState.items);
       final existingIndex = items.indexWhere((line) => line.item.id == event.item.id);
-      
+
       if (existingIndex != -1) {
         items[existingIndex] = items[existingIndex].copyWith(
           quantity: items[existingIndex].quantity + 1,
@@ -30,7 +30,7 @@ class CartBloc extends HydratedBloc<CartEvent, CartState> {
       } else {
         items.add(CartLine(item: event.item, quantity: 1));
       }
-      
+
       final totalAmount = items.fold(0.0, (sum, line) => sum + line.totalPrice);
       emit(CartLoaded(items: items, totalAmount: totalAmount));
     } else {
@@ -45,10 +45,8 @@ class CartBloc extends HydratedBloc<CartEvent, CartState> {
   ) {
     final currentState = state;
     if (currentState is CartLoaded) {
-      final items = currentState.items
-          .where((line) => line.item.id != event.itemId)
-          .toList();
-      
+      final items = currentState.items.where((line) => line.item.id != event.itemId).toList();
+
       final totalAmount = items.fold(0.0, (sum, line) => sum + line.totalPrice);
       emit(CartLoaded(items: items, totalAmount: totalAmount));
     }
@@ -66,7 +64,7 @@ class CartBloc extends HydratedBloc<CartEvent, CartState> {
         }
         return line;
       }).toList();
-      
+
       final totalAmount = items.fold(0.0, (sum, line) => sum + line.totalPrice);
       emit(CartLoaded(items: items, totalAmount: totalAmount));
     }
@@ -89,14 +87,14 @@ class CartBloc extends HydratedBloc<CartEvent, CartState> {
         items: currentState.items,
         totalAmount: currentState.totalAmount,
       ));
-      
+
       final receipt = Receipt(
         id: DateTime.now().millisecondsSinceEpoch.toString(),
         items: currentState.items,
         totalAmount: currentState.totalAmount,
         timestamp: DateTime.now(),
       );
-      
+
       emit(CartCheckedOut(receipt));
     }
   }
@@ -104,11 +102,9 @@ class CartBloc extends HydratedBloc<CartEvent, CartState> {
   @override
   CartState? fromJson(Map<String, dynamic> json) {
     try {
-      final items = (json['items'] as List?)
-          ?.map((item) => CartLine.fromJson(item as Map<String, dynamic>))
-          .toList() ?? [];
+      final items = (json['items'] as List?)?.map((item) => CartLine.fromJson(item as Map<String, dynamic>)).toList() ?? [];
       final totalAmount = (json['totalAmount'] as num?)?.toDouble() ?? 0.0;
-      
+
       return CartLoaded(items: items, totalAmount: totalAmount);
     } catch (_) {
       return const CartInitial();

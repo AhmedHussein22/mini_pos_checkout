@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+
 import '../../models/cart_line.dart';
 import '../../models/receipt.dart';
 

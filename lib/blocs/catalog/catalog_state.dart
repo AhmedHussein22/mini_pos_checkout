@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import '../../models/item.dart';
+import 'package:mini_pos_checkout/models/item.dart';
 
 abstract class CatalogState extends Equatable {
   const CatalogState();

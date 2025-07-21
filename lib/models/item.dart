@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 
+/// Represents a product in the catalog.
 class Item extends Equatable {
   final String id;
   final String name;
