@@ -1,0 +1,34 @@
+{
+  "items": [
+    {
+      "id": "1",
+      "name": "Apple",
+      "price": 1.50,
+      "description": "Fresh red apple"
+    },
+    {
+      "id": "2",
+      "name": "Banana",
+      "price": 0.80,
+      "description": "Ripe yellow banana"
+    },
+    {
+      "id": "3",
+      "name": "Orange",
+      "price": 2.00,
+      "description": "Juicy orange"
+    },
+    {
+      "id": "4",
+      "name": "Milk",
+      "price": 3.50,
+      "description": "Fresh whole milk 1L"
+    },
+    {
+      "id": "5",
+      "name": "Bread",
+      "price": 2.25,
+      "description": "Whole wheat bread loaf"
+    }
+  ]
+}
